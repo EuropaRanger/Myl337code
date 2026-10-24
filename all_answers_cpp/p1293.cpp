@@ -17,7 +17,9 @@ public:
         vector<int> dir = {-1,0,1,0,-1};
         int x,y;
         q.push({0,0,k});
-        vis[0][0][k] = '1';
+        for(int d = 0;d<=k;++d){
+            vis[0][0][d] = '1';
+        }
         for(int step=1;q.size();++step){
             for(int cur_edge = q.size();cur_edge;--cur_edge){
                 auto[a,b,k]=q.front();
@@ -32,12 +34,16 @@ public:
                         if(grid[x][y]==1){
                             if(k>0&&vis[x][y][k-1]!='1'){
                                 q.push({x,y,k-1});
-                                vis[x][y][k-1]='1';
+                                for(int d = 0;d<=k-1;++d){
+                                    vis[x][y][d] = '1';
+                                }
                             }
                         }else{
                             if(vis[x][y][k]!='1'){
                                 q.push({x,y,k});
-                                vis[x][y][k] = '1';
+                                for(int d = 0;d<=k;++d){
+                                    vis[x][y][d] = '1';
+                                }
                             }
                         }
                     }
